@@ -12,52 +12,38 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import AutomationTestCases.RegisterUser;
 import BasePKG.BaseClass;
+import PageObjectsOfAutomation.ContactUsPage;
 import PageObjectsOfAutomation.HomePageObjects;
 
 public class TestCase extends BaseClass {
-	
- 
+
+	ContactUsPage cup;
+	RegisterUser hm;
+	HomePageObjects hmp;
+
+
 	@BeforeClass
 	public void Start() 
 	{
 		MainRun();
+		cup = new ContactUsPage();
+		hm = new RegisterUser();
+		hmp=new HomePageObjects();
 	}
-	
+
 	@Test
-	public void SignUp()
+	public  void SssignUp()
 	{
-		HomePageObjects hm=new 	HomePageObjects();
-		hm.clickOnSignUp();
-		hm.EnterName("Rahul");
-		hm.EnterGmail("ramagiri@gmail.com");
-		hm.ClcikOnSignUpBtn();
-		hm.SelectSaluation();
-		hm.EnterPassword("abc@1234");
-		hm.SelectDate("12");
-		hm.SelectMonth("December");
-		hm.SelectYear("1997");
-		hm.SelectCheckBoxSignupnewsletter();
-		hm.SelectCheckBoxReceiveSpecialOffers11();
-		hm.EnterFristName("Rahul");
-		hm.EnterLastame("Rama");
-		hm.EnterCompany("pandora");
-		hm.EnterAddress("gachibowli");
-		hm.EnterAddress2("Hydrabad");
-		hm.SelectCountry("India");
-		hm.EnterState("TS");
-		hm.EnterCity("Hyd");
-		hm.EnterZipcode("500032");
-		hm.EnterMobileNumber("918289065");
-		hm.ClickOnCreateAccount();
-		hm.ValidatecreateAccountValidationText("Account Created!");
-		hm.ClickONContinueButton();
+		
+
 	}
-	
-    @AfterClass
-    public void TearDown()
-    {
-    	Closedriver();
-    }
+
+	@AfterClass
+	public void TearDown()
+	{
+		Closedriver();
+	}
 
 }

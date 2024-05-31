@@ -1,5 +1,8 @@
 package PageObjectsOfAutomation;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -19,7 +22,7 @@ public class HomePageObjects extends BaseClass{
 	WebElement userName;
 	
 	@FindBy(xpath="//input[@name='name']/following-sibling::input[@name='email']")
-	WebElement Email;
+	public WebElement Email;
 	
 	@FindBy(xpath="//button[text()='Signup']")
 	WebElement signUp;
@@ -88,6 +91,48 @@ public class HomePageObjects extends BaseClass{
 	@FindBy(linkText="Continue")
 	WebElement ContinueButton;
 	
+	@FindBy(xpath="//li/a[text()=' Delete Account']")
+	WebElement DeleteAccountButton;
+	
+	@FindBy(xpath="//b[text()='Account Deleted!']")
+	WebElement DeleteAccountValidationText;
+	
+	@FindBy(xpath="//form[@action='/login']/input[@name='email']")
+	WebElement EmailAddress;
+	
+	@FindBy(xpath="//input[@name='password']")
+	WebElement Password;
+	
+	@FindBy(xpath="//button[text()='Login']")
+	WebElement LoginButton;
+	
+	@FindBy(xpath="//a[@href='/logout']")
+	WebElement LogoutButton;
+	
+	@FindBy(xpath="//b[text()='Rahul Ramagiri']")
+	WebElement LoginVerficationText;
+	
+	@FindBy(xpath="//div[@class='login-form']/h2")
+	WebElement LogoutVerficationText;
+	
+	@FindBy(xpath="//input[@name='password']/following-sibling::p")
+	WebElement InvaliadUserPwdText;
+	
+
+	@FindBy(xpath="//input[@name='email']/following-sibling::p")
+	WebElement RegisterWithSameEamilText;
+	
+	@FindBy(xpath="//input[@id='susbscribe_email']")
+	WebElement SubScriptiontextBox;
+	
+	@FindBy(xpath="//button[@id='subscribe']")
+	WebElement SubScribeButton;
+	
+	@FindBy(xpath="//div[@id='success-subscribe']/div")
+	WebElement SubScribeSucuessMsg;
+	
+	@FindBy(xpath="//a[@href='/view_cart']")
+	WebElement ClickOnCartButton;
 	
 	
 	
@@ -104,13 +149,19 @@ public class HomePageObjects extends BaseClass{
 	public void EnterName(String name)
 	{
 		WebElement userName1=wait.until(ExpectedConditions.visibilityOf(userName));
-		userName1.sendKeys(name);
+		String Unquiename=RandomEmail(name);
+		userName1.sendKeys(Unquiename);
 	}
 	public void EnterGmail(String email)
 	{
 		WebElement Email1=wait.until(ExpectedConditions.visibilityOf(Email));
 		String Unquieemail=RandomEmail(email);
 		Email1.sendKeys(Unquieemail);
+	}
+	public void EnterGmail1(String email)
+	{
+		WebElement Email1=wait.until(ExpectedConditions.visibilityOf(Email));
+		Email1.sendKeys(email);
 	}
 	
 	public void ClcikOnSignUpBtn()
@@ -128,7 +179,7 @@ public class HomePageObjects extends BaseClass{
 	public void EnterPassword(String password)
 	{
 		WebElement enterPassword1=wait.until(ExpectedConditions.visibilityOf(enterPassword));
-		enterPassword.sendKeys(password);
+		enterPassword1.sendKeys(password);
 	}
 	
 	public void SelectDate(String date)
@@ -243,5 +294,97 @@ public class HomePageObjects extends BaseClass{
 		WebElement ContinueButton1=wait.until(ExpectedConditions.visibilityOf(ContinueButton));
 		ContinueButton1.click();
 	}
+	
+	public void ClickOnDeleteAccountButton()
+	{
+		WebElement DeleteAccountButton1=wait.until(ExpectedConditions.elementToBeClickable(DeleteAccountButton));
+		DeleteAccountButton1.click();
+	}
+	public void ValidateDeleteAccount(String Expectedmsg)
+	{
+		WebElement DeleteAccountValidationText1=wait.until(ExpectedConditions.visibilityOf(DeleteAccountValidationText));
 
+		String Acutalmsg=DeleteAccountValidationText1.getText();
+		Assert.assertEquals(Acutalmsg, Expectedmsg.toUpperCase());
+	}
+	
+	public void EnterEmailAddress(String email)
+	{
+		WebElement EmailAddress1=wait.until(ExpectedConditions.visibilityOf(EmailAddress));
+		EmailAddress1.sendKeys(email);
+	}
+
+	public void EnterPasswordLogin(String password)
+	{
+		WebElement Password1=wait.until(ExpectedConditions.visibilityOf(Password));
+		Password1.sendKeys(password);
+	}
+	
+	public void ClickOnLoginButton()
+	{
+		WebElement LoginButton1=wait.until(ExpectedConditions.visibilityOf(LoginButton));
+		LoginButton1.click();
+	}
+	
+	public void ValidateLoginFuntion(String Expectedmsg)
+	{
+		WebElement LoginVerficationText1=wait.until(ExpectedConditions.visibilityOf(LoginVerficationText));
+		String acutalmsg=LoginVerficationText1.getText();
+		System.out.println(acutalmsg+"="+Expectedmsg);
+		Assert.assertEquals(acutalmsg,Expectedmsg);
+	}
+	public void ClickOnLogoutButton()
+	{
+		WebElement LogoutButton1=wait.until(ExpectedConditions.elementToBeClickable(LogoutButton));
+		LogoutButton1.click();
+	}
+	public void ValidateLogoutFuntion(String Expectedmsg)
+	{
+		WebElement LogoutVerficationText1=wait.until(ExpectedConditions.visibilityOf(LogoutVerficationText));
+		String acutalmsg=LogoutVerficationText1.getText();
+		System.out.println(acutalmsg+"="+Expectedmsg);
+		Assert.assertEquals(acutalmsg,Expectedmsg);
+	}
+	
+	public void ValidateLoginWithInvalidCred(String Expectedmsg)
+	{
+		WebElement InvaliadUserPwdText1=wait.until(ExpectedConditions.visibilityOf(InvaliadUserPwdText));
+		String acutalmsg=InvaliadUserPwdText1.getText();
+		System.out.println(acutalmsg+"="+Expectedmsg);
+		Assert.assertEquals(acutalmsg,Expectedmsg);
+	}
+	
+	public void ValidateRegisterWithSameEamil(String Expectedmsg)
+	{
+		WebElement RegisterWithSameEamilText1=wait.until(ExpectedConditions.visibilityOf(RegisterWithSameEamilText));
+		String acutalmsg=RegisterWithSameEamilText1.getText();
+		System.out.println(acutalmsg+"="+Expectedmsg);
+		Assert.assertEquals(acutalmsg,Expectedmsg);
+	}
+	public void EnterEmailForSub(String emails)
+	{
+		WebElement SubScriptiontextBox1=wait.until(ExpectedConditions.visibilityOf(SubScriptiontextBox));
+		SubScriptiontextBox1.sendKeys(emails);
+	}
+	public void ClickOnSubScribe()
+	{
+		WebElement SubScribeButton1=wait.until(ExpectedConditions.elementToBeClickable(SubScribeButton));
+		SubScribeButton1.click();
+	}
+	
+	public void ValidateSubScribe(String ExpectedMsg)
+	{
+		WebElement SubScribeSucuessMsg1=wait.until(ExpectedConditions.visibilityOf(SubScribeSucuessMsg));
+		String acutalmsg=SubScribeSucuessMsg1.getText();
+		System.out.println(acutalmsg+" : "+ExpectedMsg);
+		Assert.assertEquals(acutalmsg,ExpectedMsg);
+	}
+	public void ClickOnCart()
+	{
+		WebElement ClickOnCartButton1=wait.until(ExpectedConditions.elementToBeClickable(ClickOnCartButton));
+		ClickOnCartButton1.click();
+		
+	}
+	
 }
+

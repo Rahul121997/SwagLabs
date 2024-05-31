@@ -6,23 +6,32 @@ import org.testng.annotations.Test;
 
 import BasePKG.BaseClass;
 import PageObjectsOfAutomation.HomePageObjects;
+import RoughPKG.TestCase;
 
 public class RegisterUser extends BaseClass 
 {
+	public HomePageObjects hm;
 
-	@BeforeClass
+	@BeforeClass(alwaysRun=true)
 	public void Start() 
 	{
 		MainRun();
+		
+	}
+	
+	@Test(priority=0)
+	public void ClickOnSignuplink()
+	{
+		hm=new 	HomePageObjects();
+		hm.clickOnSignUp();
 	}
 
-	@Test
+	@Test(priority=1)
 	public void SignUp()
 	{
-		HomePageObjects hm=new 	HomePageObjects();
-		hm.clickOnSignUp();
+		hm=new 	HomePageObjects();
 		hm.EnterName("Rahul");
-		hm.EnterGmail("ramagiri@gmail.com");
+		hm.EnterGmail("@gmail.com");
 		hm.ClcikOnSignUpBtn();
 		hm.SelectSaluation();
 		hm.EnterPassword("abc@1234");
@@ -46,6 +55,24 @@ public class RegisterUser extends BaseClass
 		hm.ClickONContinueButton();
 	}
 
+	@Test(priority=2)
+	public void DeleteAccount()
+	{
+		hm.ClickOnDeleteAccountButton();
+		hm.ValidateDeleteAccount("Account Deleted!");
+	}
+	
+	@Test(priority=3)
+	public void RegiesterWithSameEamil()
+	{
+		hm.clickOnSignUp();
+		hm.EnterName("Rahul");
+		hm.EnterGmail1("ramagirirahul12@gmail.com");
+		hm.ClcikOnSignUpBtn();
+		hm.ValidateRegisterWithSameEamil("Email Address already exist!");
+		
+	}
+	
 	@AfterClass
 	public void TearDown()
 	{

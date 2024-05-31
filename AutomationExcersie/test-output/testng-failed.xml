@@ -3,13 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="AutomationTestCases.RegisterUser">
+      <class name="AutomationTestCases.ContactUsForm_TestCasespage_ValidateProductsPage">
         <methods>
-          <include name="SignUp"/>
+          <include name="AddProductToCart"/>
+          <include name="ValidateCheckOutItems"/>
+          <include name="StartUp"/>
+          <include name="AddMoreItemsToCart"/>
           <include name="TearDown"/>
-          <include name="Start"/>
         </methods>
-      </class> <!-- AutomationTestCases.RegisterUser -->
+      </class> <!-- AutomationTestCases.ContactUsForm_TestCasespage_ValidateProductsPage -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
